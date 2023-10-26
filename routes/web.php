@@ -6,6 +6,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,7 @@ Route::resource('/companies', CompanyController::class);
 Route::resources([
     '/tags' => TagController::class,
     '/tasks' => TaskController::class
+]);
+Route::resource('/activities', ActivityController::class)->except([
+    'index', 'show'
 ]);
