@@ -11,14 +11,9 @@ class ContactController extends Controller
     {
     }
 
-    public function index(CompanyRepository $company, Request $request)
+    public function index()
     {
-        // dd($request->sort_by);
-        // $companies = [
-        //     1 => ['name' => 'Company One', 'contacts' => 3],
-        //     2 => ['name' => 'Company Two', 'contacts' => 5],
-        // ];
-        $companies = $company->pluck();
+        $companies = $this->company->pluck();
         $contacts = $this->getContacts();
         return view('contacts.index', compact('contacts', 'companies'));
     }
