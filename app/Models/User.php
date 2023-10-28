@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
-    protected $with = ['contacts', 'companies'];
+    // protected $with = ['contacts', 'companies'];
 
     public function companies()
     {
