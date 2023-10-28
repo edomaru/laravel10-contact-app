@@ -22,7 +22,7 @@ use App\Http\Controllers\ContactNoteController;
 */
 
 Route::get('/', WelcomeController::class);
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class);
     Route::resource('/contacts', ContactController::class);
     Route::delete('/contacts/{contact}/restore', [ContactController::class, 'restore'])
