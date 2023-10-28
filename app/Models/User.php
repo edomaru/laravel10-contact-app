@@ -49,6 +49,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+    protected $with = ['contacts', 'companies'];
+
     public function companies()
     {
         return $this->hasMany(Company::class);
