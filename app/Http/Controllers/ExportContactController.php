@@ -18,6 +18,32 @@ class ExportContactController extends Controller
     public function store(ExportContactRequest $request)
     {
         $columns = $request->columns;
-        dd($columns);
+        $contacts = Contact::forUser($request->user())
+            ->with('company')
+            ->latest()
+            ->get();
+
+        return response()->streamDownload(function () use ($contacts, $columns) {
+            $resource = fopen('php://output', 'w');
+            fputcsv($resource, $columns);
+
+            $contacts->each(function ($row) use ($columns, $resource) {
+                $rowData = [];
+
+                foreach ($columns as $column) {
+                    if ($column === 'company') {
+                        $rowData[] = $row->company->name;
+                    } else {
+                        $rowData[] = $row->{$column};
+                    }
+                }
+
+                fputcsv($resource, $rowData);
+            });
+
+            fclose($resource);
+        }, "contacts" . time() . ".csv", [
+            'Content-Type' => 'text/csv'
+        ]);
     }
 }
