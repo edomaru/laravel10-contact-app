@@ -19,6 +19,7 @@
                   <div class="ml-auto">
                     <a href="{{ route('contacts.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
                     <a href="{{ route('contacts.import.create') }}" class="btn btn-info"><i class="fa fa-upload"></i> Import</a>
+                    <a href="{{ route('contacts.export.create') }}" class="btn btn-warning"><i class="fa fa-download"></i> Export</a>
                   </div>
                 </div>
               </div>
